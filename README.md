@@ -12,7 +12,7 @@ int rank( String key )
 String select( int )
 ```
 
-The C++ version of insert() actually has as a prototype similar to `void insert( String key , int value )`, so you could insert any value to a given key. This behavior was changed when creating the java version, since the use of insert() method was always to increment the value. When inserting an key that is not already in the symbol table, it's value is initialized as 1. Then, it is incremented by 1 at every new insert on the same key.
+The C++ version of insert() actually has as a prototype similar to `void insert( String key , int value )`, so you could insert any value to a given key. This behavior was changed when creating the java version, since the use of insert() method was always to increment the value. When inserting a key that is not already in the symbol table, it's value is initialized as 1. Then, it is incremented by 1 at every new insert on the same key.
 
 ## Data Structures
 
