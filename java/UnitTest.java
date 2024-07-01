@@ -21,9 +21,11 @@ public class UnitTest{
 		ST = new ListaOrd( args[0] );
 	    else if( args[1].equals( "AB" ) )
 		ST = new ArvoreBin( args[0] );
-	    /*
 	    else if( args[1].equals( "TR" ) )
 		ST = new Treap( args[0] );
+	    /*
+	    else if( args[1].equals( "A23" ) )
+		ST = new Arvore23( args[0] );
 	    */
 	    else{
 		System.out.println( "Unkown type" );
