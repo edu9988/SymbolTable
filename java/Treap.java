@@ -3,20 +3,51 @@ public class Treap implements SymbolTable{
 
     public Treap( String filename ){
 	root = new TreapCell();
+	root.genPri();
 	readFile( filename );
+    }
+
+    private TreapCell split( TreapCell node , String key ){
+	TreapCell ret = new TreapCell();
+	if( node != null ){
+	    int aux = node.getKey().compareToIgnoreCase( key );
+	    if( aux < 0 ){
+		ret.left = node;
+		TreapCell bogusNode = split( node.right , key );
+		ret.left.right = bogusNode.left;
+		ret.right = bogusNode.right;
+	    }
+	    else{
+		ret.right = node;
+		TreapCell bogusNode = split( node.left , key );
+		ret.right.left = bogusNode.right;
+		ret.left = bogusNode.left;
+	    }
+	}
+	return ret;
     }
 
     public void insert( String key ){
 	int aux = 0;
-	TreapCell c = root, prev = root;
+	boolean found = false;
+	TreapCell c = root, prev = root, 
+	    newC, target = root, targetParent = root;
 	if( c.getKey() == null ){
 	    c.setKey( key );
 	    c.setVal( 1 );
 	    return;
 	}
 
+	newC = new TreapCell();
+	newC.genPri();
 	while( c != null ){
-	    prev = c;
+	    if( !found && newC.getPri() > c.getPri() ){
+		found = true;
+		target = c;
+		targetParent = prev;
+	    }
+	    else
+		prev = c;
 	    aux = c.getKey().compareToIgnoreCase( key );
 	    if( aux < 0 )
 		c = c.right;
@@ -28,16 +59,25 @@ public class Treap implements SymbolTable{
 		c = c.left;
 	}
 
-	if( aux < 0 ){
-	    prev.right = new TreapCell();
-	    prev.right.setKey( key );
-	    prev.right.setVal( 1 );
+	if( found ){
+	    if( targetParent == target )
+		root = newC;
+	    else if( targetParent.left == target )
+		targetParent.left = newC;
+	    else /* targetParent.right == target */
+		targetParent.right = newC;
+	    target = split( target, key );
+	    newC.left = target.left;
+	    newC.right = target.right;
 	}
 	else{
-	    prev.left = new TreapCell();
-	    prev.left.setKey( key );
-	    prev.left.setVal( 1 );
+	    if( aux < 0 )
+		prev.right = newC;
+	    else
+		prev.left = newC;
 	}
+	newC.setKey( key );
+	newC.setVal( 1 );
     }
 
     public int retrieve( String key ){
@@ -63,7 +103,7 @@ public class Treap implements SymbolTable{
     public void debug_print( TreapCell c ){
 	if( c != null ){
 	    debug_print( c.left );
-	    System.out.println( c.getKey() + ":\t" + c.getVal() );
+	    System.out.println( c.getKey() + ":\t" + c.getVal() + "\tpri:" + c.getPri() );
 	    debug_print( c.right );
 	}
     }
