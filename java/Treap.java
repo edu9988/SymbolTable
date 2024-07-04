@@ -1,3 +1,7 @@
+/*
+https://cp-algorithms.com/data_structures/treap.html
+*/
+
 public class Treap implements SymbolTable{
     TreapCell root;
 
@@ -108,26 +112,34 @@ public class Treap implements SymbolTable{
 	}
     }
 
+    private TreapCell merge( TreapCell T1 , TreapCell T2 ){
+	if( T1 == null && T2 == null )
+	    return null;
+	else if( T1 == null )
+	    return T2;
+	else if( T2 == null )
+	    return T1;
+	else{ /* T1 != null && T2 != null */
+	    if( T1.getPri() > T2.getPri() ){
+		T1.right = merge( T1.right , T2 );
+		return T1;
+	    }
+	    else{
+		T2.left = merge( T1 , T2.left );
+		return T2;
+	    }
+	}
+    }
+
     public void remove( String key ){
 	if( root.getKey() == null )
 	    return;
 
 	if( root.getKey().compareToIgnoreCase( key ) == 0 ){
-	    if( root.left == null && root.right == null ){
+	    root = merge( root.left , root.right );
+	    if( root == null ){
 		root = new TreapCell();
-	    }
-	    else if( root.left == null ){
-		root = root.right;
-	    }
-	    else if( root.right == null ){
-		root = root.left;
-	    }
-	    else{
-		TreapCell maxLeft = root.left;
-		while( maxLeft.right != null )
-		    maxLeft = maxLeft.right;
-		maxLeft.right = root.right;
-		root = root.left;
+		root.genPri();
 	    }
 	    return;
 	}
@@ -142,34 +154,10 @@ public class Treap implements SymbolTable{
 		c = c.right;
 	    }
 	    else if( aux == 0 ){
-		if( c.left == null && c.right == null ){
-		    if( c == prev.left )
-			prev.left = null;
-		    else
-			prev.right = null;
-		}
-		else if( c.left == null ){
-		    if( c == prev.left )
-			prev.left = c.right;
-		    else
-			prev.right = c.right;
-		}
-		else if( c.right == null ){
-		    if( c == prev.left )
-			prev.left = c.left;
-		    else
-			prev.right = c.left;
-		}
-		else{ /* both children not null */
-		    TreapCell maxLeft = c.left;
-		    while( maxLeft.right != null )
-			maxLeft = maxLeft.right;
-		    maxLeft.right = c.right;
-		    if( c == prev.left )
-			prev.left = c.left;
-		    else
-			prev.right = c.left;
-		}
+		if( prev.left == c )
+		    prev.left = merge( c.left , c.right );
+		else /* prev.right == c */
+		    prev.right = merge( c.left , c.right );
 		return;
 	    }
 	    else{
