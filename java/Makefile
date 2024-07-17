@@ -4,7 +4,8 @@ FLAGS = -Xlint
 EXEC = UnitTest
 CLASSES = VetorDes Pair SymbolTable VetorOrd\
  ListaDes ListCell ListaOrd BinTreeCell \
- ArvoreBin Treap TreapCell
+ ArvoreBin Treap TreapCell TwoThreeCell \
+ Arvore23
 JAVA_CLASSES = $(addsuffix .java,$(CLASSES))
 MODE = TR
 FILE = Uncle_Wiggily_and_The_Pirates.txt
