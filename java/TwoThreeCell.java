@@ -1,9 +1,11 @@
 public class TwoThreeCell{
-    TwoThreeCell left;
-    Pair P1;
-    TwoThreeCell middle;
-    Pair P2;
-    TwoThreeCell right;
+    public TwoThreeCell parent;
 
-    Boolean threeNode;
+    public TwoThreeCell left;
+    public Pair p1;
+    public TwoThreeCell middle;
+    public Pair p2;
+    public TwoThreeCell right;
+
+    public Boolean threeNode;
 }

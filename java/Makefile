@@ -7,7 +7,7 @@ CLASSES = VetorDes Pair SymbolTable VetorOrd\
  ArvoreBin Treap TreapCell TwoThreeCell \
  Arvore23
 JAVA_CLASSES = $(addsuffix .java,$(CLASSES))
-MODE = TR
+MODE = A23
 FILE = Uncle_Wiggily_and_The_Pirates.txt
 
 #################################################
