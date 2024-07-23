@@ -1,5 +1,5 @@
 public class VetorOrd implements SymbolTable{
-    Pair[] v;
+    private Pair[] v;
     private int last; //first empty position
 
     public VetorOrd( String filename ){

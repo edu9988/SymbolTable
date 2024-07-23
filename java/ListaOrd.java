@@ -1,5 +1,5 @@
 public class ListaOrd implements SymbolTable{
-    ListCell head;
+    private ListCell head;
 
     public ListaOrd( String filename ){
 	head = new ListCell();

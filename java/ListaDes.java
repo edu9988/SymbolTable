@@ -1,5 +1,5 @@
 public class ListaDes implements SymbolTable{
-    ListCell head;
+    private ListCell head;
 
     public ListaDes( String filename ){
 	head = new ListCell();

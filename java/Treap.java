@@ -3,7 +3,7 @@ https://cp-algorithms.com/data_structures/treap.html
 */
 
 public class Treap implements SymbolTable{
-    TreapCell root;
+    private TreapCell root;
 
     public Treap( String filename ){
 	root = new TreapCell();

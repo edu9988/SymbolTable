@@ -1,5 +1,5 @@
 public class Arvore23 implements SymbolTable{
-    TwoThreeCell root;
+    private TwoThreeCell root;
 
     public Arvore23( String filename ){
 	root = new TwoThreeCell();

@@ -1,5 +1,5 @@
 public class VetorDes implements SymbolTable{
-    Pair[] v;
+    private Pair[] v;
     private int last; //first empty position
 
     public VetorDes( String filename ){

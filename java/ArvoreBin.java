@@ -1,5 +1,5 @@
 public class ArvoreBin implements SymbolTable{
-    BinTreeCell root;
+    private BinTreeCell root;
 
     public ArvoreBin( String filename ){
 	root = new BinTreeCell();
